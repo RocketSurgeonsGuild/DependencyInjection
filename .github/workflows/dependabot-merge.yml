@@ -1,4 +1,4 @@
-name: Label Commenter
+name: Dependabot Commenter
 
 on:
   # issues:
@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: master
-      - name: Label Commenter
+      - name: Dependabot Commenter
         if: |
           contains(github.event.issue.labels.*.name, ':shipit: merge') && (github.pull_request.user.login == 'dependabot[bot]' || github.pull_request.user.login == 'dependabot-preview[bot]')
         uses: peaceiris/actions-label-commenter@v1
