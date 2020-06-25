@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 
-namespace Rocket.Surgery.Extensions.Autofac.Internals
+namespace Rocket.Surgery.Conventions.Autofac.Internals
 {
     /// <summary>
     /// GenericObservableObservable.

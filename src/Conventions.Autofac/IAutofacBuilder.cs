@@ -1,7 +1,6 @@
 using JetBrains.Annotations;
-using Rocket.Surgery.Conventions;
 
-namespace Rocket.Surgery.Extensions.Autofac
+namespace Rocket.Surgery.Conventions.Autofac
 {
     /// <summary>
     /// IAutofacBuilder.

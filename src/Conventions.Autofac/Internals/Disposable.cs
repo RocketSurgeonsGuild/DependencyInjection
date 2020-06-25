@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Rocket.Surgery.Extensions.Autofac.Internals
+namespace Rocket.Surgery.Conventions.Autofac.Internals
 {
     /// <summary>
     /// Disposable.

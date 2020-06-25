@@ -5,9 +5,10 @@ using Autofac;
 using Autofac.Builder;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
+
 #pragma warning disable CA2000 // Dispose objects before losing scope
 
-namespace Rocket.Surgery.Extensions.Autofac
+namespace Rocket.Surgery.Conventions.Autofac
 {
     /// <summary>
     /// CustomRegistration.
