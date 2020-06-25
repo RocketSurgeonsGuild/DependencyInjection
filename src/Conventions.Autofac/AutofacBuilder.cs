@@ -4,14 +4,13 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Rocket.Surgery.Conventions;
+using Rocket.Surgery.Conventions.Autofac.Internals;
+using Rocket.Surgery.Conventions.DependencyInjection;
 using Rocket.Surgery.Conventions.Reflection;
-using Rocket.Surgery.Conventions.Scanners;
-using Rocket.Surgery.Extensions.Autofac.Internals;
-using Rocket.Surgery.Extensions.DependencyInjection;
 
-namespace Rocket.Surgery.Extensions.Autofac
+namespace Rocket.Surgery.Conventions.Autofac
 {
     /// <summary>
     /// AutofacBuilder.
@@ -56,7 +55,7 @@ namespace Rocket.Surgery.Extensions.Autofac
         /// services
         /// </exception>
         public AutofacBuilder(
-            IRocketEnvironment environment,
+            IHostEnvironment environment,
             IConfiguration configuration,
             IConventionScanner scanner,
             IAssemblyProvider assemblyProvider,
@@ -144,7 +143,7 @@ namespace Rocket.Surgery.Extensions.Autofac
         /// Based on IHostEnvironment / IHostingEnvironment
         /// </summary>
         /// <value>The environment.</value>
-        public IRocketEnvironment Environment { get; }
+        public IHostEnvironment Environment { get; }
 
         /// <summary>
         /// Gets the on build.

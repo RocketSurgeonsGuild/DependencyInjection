@@ -1,6 +1,6 @@
 ﻿using Autofac;
 
-namespace Rocket.Surgery.Extensions.Autofac
+namespace Rocket.Surgery.Conventions.Autofac
 {
     /// <summary>
     /// A delegate for the autofac container builder

@@ -9,11 +9,12 @@ using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Rocket.Surgery.Conventions;
+using Rocket.Surgery.Conventions.Autofac;
+using Rocket.Surgery.Conventions.CommandLine;
+using Rocket.Surgery.Conventions.DependencyInjection;
 using Rocket.Surgery.Conventions.Reflection;
 using Rocket.Surgery.Conventions.Scanners;
 using Rocket.Surgery.Extensions.Autofac.Tests;
-using Rocket.Surgery.Extensions.CommandLine;
-using Rocket.Surgery.Extensions.DependencyInjection;
 using Rocket.Surgery.Extensions.Testing;
 using Rocket.Surgery.Hosting;
 using Xunit;
@@ -294,8 +295,8 @@ namespace Rocket.Surgery.Extensions.Autofac.Tests
             var builder = Host.CreateDefaultBuilder(Array.Empty<string>())
                .ConfigureRocketSurgery(
                     rb => rb
+                       .UseScannerUnsafe(new BasicConventionScanner(A.Fake<IServiceProviderDictionary>()))
                        .UseAutofac()
-                       .UseScanner(new BasicConventionScanner(A.Fake<IServiceProviderDictionary>()))
                        .UseAssemblyCandidateFinder(
                             new DefaultAssemblyCandidateFinder(new[] { typeof(AutofacBuilderTests).Assembly })
                         )

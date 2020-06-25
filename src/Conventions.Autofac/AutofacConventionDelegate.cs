@@ -1,4 +1,4 @@
-﻿namespace Rocket.Surgery.Extensions.Autofac
+﻿namespace Rocket.Surgery.Conventions.Autofac
 {
     /// <summary>
     /// Delegate ServiceConventionAction
