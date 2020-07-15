@@ -18,22 +18,19 @@ namespace Microsoft.Extensions.Hosting
     public static class AutofacRocketHostExtensions
     {
         /// <summary>
-        /// Uses the autofac.
+        /// Uses the Autofac.
         /// </summary>
         /// <param name="builder">The builder.</param>
-        /// <param name="containerBuilder">The container builder.</param>
+        /// <param name="@delegate">The container.</param>
         /// <returns>IHostBuilder.</returns>
-        public static IHostBuilder UseAutofac(
-            [NotNull] this IHostBuilder builder,
-            ContainerBuilder? containerBuilder = null
-        )
+        public static IConventionHostBuilder ConfigureAutofac([NotNull] this IConventionHostBuilder builder, AutofacConventionDelegate @delegate)
         {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.GetConventions().UseAutofac(containerBuilder);
+            builder.AppendDelegate(@delegate);
             return builder;
         }
 
@@ -53,10 +50,9 @@ namespace Microsoft.Extensions.Hosting
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.ConfigureHosting(hosting => hosting.Builder.ConfigureServices(
-                (context, services) =>
-                {
-                    hosting.Builder.UseServiceProviderFactory(
+            return builder.ConfigureHosting(
+                hosting => hosting.Builder.UseServiceProviderFactory(
+                    context =>
                         new ServicesBuilderServiceProviderFactory(
                             collection =>
                                 new AutofacBuilder(
@@ -71,10 +67,8 @@ namespace Microsoft.Extensions.Hosting
                                     builder.ServiceProperties
                                 )
                         )
-                    );
-                }
-            ));
-            return builder;
+                )
+            );
         }
     }
 }
