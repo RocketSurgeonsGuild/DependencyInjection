@@ -41,7 +41,6 @@ namespace Rocket.Surgery.Extensions.Autofac.Tests
             servicesBuilder.AssemblyCandidateFinder.Should().NotBeNull();
             servicesBuilder.Services.Should().BeSameAs(services);
             servicesBuilder.Configuration.Should().NotBeNull();
-            servicesBuilder.Environment.Should().NotBeNull();
 
             Action a = () => { servicesBuilder.PrependConvention(A.Fake<IAutofacConvention>()); };
             a.Should().NotThrow();
