@@ -6,16 +6,16 @@ using Rocket.Surgery.Conventions;
 using Rocket.Surgery.Conventions.Autofac;
 using Rocket.Surgery.Conventions.Reflection;
 using Rocket.Surgery.Conventions.Scanners;
-using Rocket.Surgery.Hosting;
+using Rocket.Surgery.WebAssembly.Hosting;
 
 // ReSharper disable once CheckNamespace
-namespace Microsoft.Extensions.Hosting
+namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
 {
     /// <summary>
     /// Class AutofacRocketHostExtensions.
     /// </summary>
     [PublicAPI]
-    public static class AutofacRocketHostExtensions
+    public static class WebAssemblyAutofacRocketHostExtensions
     {
         /// <summary>
         /// Uses the Autofac.
@@ -39,36 +39,32 @@ namespace Microsoft.Extensions.Hosting
         /// </summary>
         /// <param name="builder">The builder.</param>
         /// <param name="containerBuilder">The container builder.</param>
-        /// <returns>IConventionHostBuilder.</returns>
-        public static IConventionHostBuilder UseAutofac(
-            [NotNull] this IConventionHostBuilder builder,
-            ContainerBuilder? containerBuilder = null
-        )
+        /// <returns>IWebAssemblyHostBuilder.</returns>
+        public static IConventionHostBuilder UseAutofac([NotNull] this IConventionHostBuilder builder, ContainerBuilder? containerBuilder = null)
         {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            return builder.ConfigureHosting(
-                hosting => hosting.Builder.UseServiceProviderFactory(
-                    context =>
-                        new ServicesBuilderProviderFactory(
-                            hosting.Builder,
-                            (builder, collection) =>
-                                new AutofacBuilder(
-                                    context.Configuration,
-                                    builder.Get<IConventionScanner>()!,
-                                    builder.Get<IAssemblyProvider>()!,
-                                    builder.Get<IAssemblyCandidateFinder>()!,
-                                    collection,
-                                    containerBuilder ?? new ContainerBuilder(),
-                                    builder.Get<ILogger>()!,
-                                    builder.ServiceProperties
-                                )
+            var wasmBuilder = builder.Get<IWebAssemblyHostBuilder>()!;
+            wasmBuilder.ConfigureContainer(
+                new WebAssemblyServicesBuilderProviderFactory(
+                    wasmBuilder,
+                    (builder, collection) =>
+                        new AutofacBuilder(
+                            wasmBuilder.Configuration,
+                            builder.Get<IConventionScanner>()!,
+                            builder.Get<IAssemblyProvider>()!,
+                            builder.Get<IAssemblyCandidateFinder>()!,
+                            collection,
+                            containerBuilder ?? new ContainerBuilder(),
+                            builder.Get<ILogger>()!,
+                            builder.ServiceProperties
                         )
                 )
             );
+            return builder;
         }
     }
 }

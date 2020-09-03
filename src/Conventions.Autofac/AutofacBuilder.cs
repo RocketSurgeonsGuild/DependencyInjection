@@ -4,7 +4,6 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Rocket.Surgery.Conventions.Autofac.Internals;
 using Rocket.Surgery.Conventions.DependencyInjection;
@@ -36,7 +35,6 @@ namespace Rocket.Surgery.Conventions.Autofac
         /// <summary>
         /// Initializes a new instance of the <see cref="AutofacBuilder" /> class.
         /// </summary>
-        /// <param name="environment">The environment.</param>
         /// <param name="configuration">The configuration.</param>
         /// <param name="scanner">The scanner.</param>
         /// <param name="assemblyProvider">The assembly provider.</param>
@@ -55,7 +53,6 @@ namespace Rocket.Surgery.Conventions.Autofac
         /// services
         /// </exception>
         public AutofacBuilder(
-            IHostEnvironment environment,
             IConfiguration configuration,
             IConventionScanner scanner,
             IAssemblyProvider assemblyProvider,
@@ -67,7 +64,6 @@ namespace Rocket.Surgery.Conventions.Autofac
         )
             : base(scanner, assemblyProvider, assemblyCandidateFinder, properties)
         {
-            Environment = environment ?? throw new ArgumentNullException(nameof(environment));
             _containerBuilder = containerBuilder ?? throw new ArgumentNullException(nameof(containerBuilder));
             Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             Services = services ?? throw new ArgumentNullException(nameof(services));
@@ -137,13 +133,6 @@ namespace Rocket.Surgery.Conventions.Autofac
         /// </summary>
         /// <value>The services.</value>
         public IServiceCollection Services { get; }
-
-        /// <summary>
-        /// The environment that this convention is running
-        /// Based on IHostEnvironment / IHostingEnvironment
-        /// </summary>
-        /// <value>The environment.</value>
-        public IHostEnvironment Environment { get; }
 
         /// <summary>
         /// Gets the on build.
