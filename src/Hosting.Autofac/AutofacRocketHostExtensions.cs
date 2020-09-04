@@ -23,7 +23,7 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="builder">The builder.</param>
         /// <param name="delegate">The container.</param>
         /// <returns>IHostBuilder.</returns>
-        public static IConventionHostBuilder ConfigureAutofac([NotNull] this IConventionHostBuilder builder, AutofacConventionDelegate @delegate)
+        public static ConventionContextBuilder ConfigureAutofac([NotNull] this ConventionContextBuilder builder, AutofacConvention @delegate)
         {
             if (builder == null)
             {
@@ -39,36 +39,15 @@ namespace Microsoft.Extensions.Hosting
         /// </summary>
         /// <param name="builder">The builder.</param>
         /// <param name="containerBuilder">The container builder.</param>
-        /// <returns>IConventionHostBuilder.</returns>
-        public static IConventionHostBuilder UseAutofac(
-            [NotNull] this IConventionHostBuilder builder,
-            ContainerBuilder? containerBuilder = null
-        )
+        /// <returns>ConventionContextBuilder.</returns>
+        public static ConventionContextBuilder UseAutofac([NotNull] this ConventionContextBuilder builder, ContainerBuilder? containerBuilder = null)
         {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            return builder.ConfigureHosting(
-                hosting => hosting.Builder.UseServiceProviderFactory(
-                    context =>
-                        new ServicesBuilderProviderFactory(
-                            hosting.Builder,
-                            (builder, collection) =>
-                                new AutofacBuilder(
-                                    context.Configuration,
-                                    builder.Get<IConventionScanner>()!,
-                                    builder.Get<IAssemblyProvider>()!,
-                                    builder.Get<IAssemblyCandidateFinder>()!,
-                                    collection,
-                                    containerBuilder ?? new ContainerBuilder(),
-                                    builder.Get<ILogger>()!,
-                                    builder.ServiceProperties
-                                )
-                        )
-                )
-            );
+            return builder.ConfigureHosting((context, builder) => builder.UseServiceProviderFactory(new AutofacConventionServiceProviderFactory(context, containerBuilder)));
         }
     }
 }

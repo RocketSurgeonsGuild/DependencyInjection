@@ -25,22 +25,10 @@ namespace Rocket.Surgery.Extensions.Autofac.Tests
     public class WebAssemblyAutofacBuilderTests : AutoFakeTest
     {
         [Fact]
-        public async Task Should_Integrate_With_Autofac()
+        public void Should_Integrate_With_Autofac()
         {
             var builder = LocalWebAssemblyHostBuilder.CreateDefault()
-               .ConfigureRocketSurgery(
-                    rb => rb
-                       .UseScannerUnsafe(new BasicConventionScanner(A.Fake<IServiceProviderDictionary>()))
-                       .UseAutofac()
-                       .UseAssemblyCandidateFinder(
-                            new DefaultAssemblyCandidateFinder(new[] { typeof(WebAssemblyAutofacBuilderTests).Assembly })
-                        )
-                       .UseAssemblyProvider(new DefaultAssemblyProvider(new[] { typeof(WebAssemblyAutofacBuilderTests).Assembly }))
-                       .AppendDelegate(
-                            new CommandLineConventionDelegate(c => c.OnRun(state => 1337)),
-                            new CommandLineConventionDelegate(c => c.OnRun(state => 1337))
-                        )
-                );
+               .ConfigureRocketSurgery(rb => rb.UseAssemblies(new[] { typeof(WebAssemblyAutofacBuilderTests).Assembly }).UseAutofac());
 
             var was = builder.Build();
             was.Services.GetRequiredService<ILifetimeScope>().Should().NotBeNull();

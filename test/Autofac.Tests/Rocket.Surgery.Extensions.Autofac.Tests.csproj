@@ -3,6 +3,7 @@
         <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
     </PropertyGroup>
     <ItemGroup>
+        <PackageReference Include="Rocket.Surgery.Conventions" />
         <ProjectReference Include="..\..\src\Conventions.Autofac\Rocket.Surgery.Conventions.Autofac.csproj" />
         <ProjectReference Include="..\..\src\Hosting.Autofac\Rocket.Surgery.Hosting.Autofac.csproj" />
         <ProjectReference Include="..\..\src\WebAssembly.Hosting.Autofac\Rocket.Surgery.WebAssembly.Hosting.Autofac.csproj" />
