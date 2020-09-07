@@ -14,7 +14,6 @@ using Rocket.Surgery.Conventions.Autofac;
 using Rocket.Surgery.Conventions.CommandLine;
 using Rocket.Surgery.Conventions.DependencyInjection;
 using Rocket.Surgery.Conventions.Reflection;
-using Rocket.Surgery.Conventions.Scanners;
 using Rocket.Surgery.Extensions.Autofac.Tests;
 using Rocket.Surgery.Extensions.Testing;
 using Rocket.Surgery.Hosting;

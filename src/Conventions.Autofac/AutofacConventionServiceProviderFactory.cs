@@ -24,11 +24,11 @@ namespace Rocket.Surgery.Conventions.Autofac
             var configuration = _conventionContext.Get<IConfiguration>() ?? throw new ArgumentException("Configuration was not found in context");
             foreach (var item in _conventionContext.Conventions.Get<IAutofacConvention, AutofacConvention>())
             {
-                if (item.Convention is IAutofacConvention convention)
+                if (item is IAutofacConvention convention)
                 {
                     convention.Register(_conventionContext, configuration, services, _container);
                 }
-                else if (item.Delegate is AutofacConvention @delegate)
+                else if (item is AutofacConvention @delegate)
                 {
                     @delegate(_conventionContext, configuration, services, _container);
                 }

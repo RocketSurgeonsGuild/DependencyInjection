@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using Rocket.Surgery.Conventions;
 using Rocket.Surgery.Conventions.Autofac;
 using Rocket.Surgery.Conventions.Reflection;
-using Rocket.Surgery.Conventions.Scanners;
 using Rocket.Surgery.Hosting;
 
 // ReSharper disable once CheckNamespace
