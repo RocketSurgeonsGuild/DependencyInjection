@@ -29,10 +29,10 @@
   <ItemGroup>
     <PackageReference Update="Autofac" Version="6.0.0" />
     <PackageReference Update="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
-    <PackageReference Update="Rocket.Surgery.Conventions" Version="10.0.0-beta.426" />
-    <PackageReference Update="Rocket.Surgery.Conventions.Abstractions" Version="10.0.0-beta.426" />
-    <PackageReference Update="Rocket.Surgery.Hosting" Version="10.0.0-beta.426" />
-    <PackageReference Update="Rocket.Surgery.WebAssembly.Hosting" Version="10.0.0-beta.426" />
+    <PackageReference Update="Rocket.Surgery.Conventions" Version="10.0.0-beta.98" />
+    <PackageReference Update="Rocket.Surgery.Conventions.Abstractions" Version="10.0.0-beta.98" />
+    <PackageReference Update="Rocket.Surgery.Hosting" Version="10.0.0-beta.98" />
+    <PackageReference Update="Rocket.Surgery.WebAssembly.Hosting" Version="10.0.0-beta.98" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="Bogus" Version="32.0.1" />
